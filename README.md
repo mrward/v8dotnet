@@ -19,7 +19,7 @@ To speed up this process you can also use the `build_V8_Net.sh`.
 
 The build steps are:
 Clone the project
-1. `git clone git@github.com:chrisber/v8dotnet.git`
+1. `git clone git@github.com:chrisber/v8dotnet.git` and `git submodule update --init --recursive`
 Building Google V8
 
 2. `cd Source/V8.NET-Proxy/V8/`
