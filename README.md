@@ -46,7 +46,7 @@ g++ -Wall -std=c++11 -shared  -fPIC -I../ -I../V8/ -I/usr/include/glib-2.0/ -I/u
     - libv8.so 
     - libV8_Net_Proxy.so
 9. Now we can build the C# projects. Build the `V8.Net.MonoDevelop.sln` via MonoDevelop or with the command:
-10. `mdtool -v build "--configuration:Release" "Source/V8.Net.MonoDevelop.sln"`
+10.  `mdtool -v build "--configuration:Release" "Source/V8.Net.MonoDevelop.sln"`
 11. The last step is to copy all files into one directory
 12. Release Directory
     - libicui18n.so
