@@ -1,11 +1,11 @@
 v8dotnet
 ========
-#[This is a V8.Net port to Mono.](https://v8dotnet.codeplex.com/)
 
-The Repository contains the following branches:
-- Master (stable releases for windows)
-- development (bleeding edge development changes)
-- development-mono (bleeding edge development changes for mono)
+
+The **Repository** contains the following branches:
+- **Master** (stable releases for windows)
+- **development** (bleeding edge development changes)
+- **development-mono** (bleeding edge development changes for mono)
 
 **Summary:** A fairly non-abstracted wrapper for Google's V8 JavaScript engine.
 
