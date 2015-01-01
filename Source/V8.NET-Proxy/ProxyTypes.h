@@ -72,7 +72,7 @@ template <class T> struct CopyablePersistent {
     Local<T> Handle() const { return Local<T>::New(Isolate::GetCurrent(), Value); }
     bool IsEmpty() const { return Value.IsEmpty(); }
     void Reset() { return Value.Reset(); }
-    template <class S> Local<S> As() { return Handle().As<S>(); }
+    template <class S> Local<S> As() { return Handle().template As<S>(); }
 };
 
 #define V8Undefined v8::Undefined(Isolate::GetCurrent())

@@ -19,7 +19,7 @@
             }
           }
     }], 
-    ["OS=='linux'", {
+    ["OS=='mac'", {
         "target_defaults": {
             "default_configuration": "Release",
             "xcode_settings": {

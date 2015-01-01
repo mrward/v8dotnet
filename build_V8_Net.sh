@@ -26,7 +26,7 @@ currentFunction=""
 	printf '\e[1;34m%-6s\e[m \n' "make library=shared gdbjit=on -j ${JOBSV8=$1}"
 	#Debug
 	#make native library=shared gdbjit=on -g -j ${JOBSV8=$1}
-	make library=shared -j ${JOBSV8=$1}
+	make ia32 library=shared snapshot=off -j ${JOBSV8=$1}
 }
 
  buildV8Proxy (){
@@ -38,23 +38,30 @@ currentFunction=""
 
 	printf '\e[1;34m%-6s\e[m \n' "Build V8.Net native proxy (libV8_Net_Proxy.so )"
 
-    ./gyp/gyp  -Dbase_dir=`pwd` -Dtarget_arch="x64" -Dbuild_option="release" -f make --depth=. v8dotnet.gyp  --generator-output=./Build/x64.release/makefiles
-     V=1 make -C ./Build/x64.release/makefiles
-     currentFunction="make x64.release"
+    ./gyp/gyp  -Dbase_dir=`pwd` -Dtarget_arch="ia32" -Dbuild_option="release" -f make --depth=. v8dotnet.gyp  --generator-output=./Build/ia32.release/makefiles
+     V=1 make -C ./Build/ia32.release/makefiles
+     currentFunction="make ia32.release"
      buildResult
+
+ #   ./gyp/gyp  -Dbase_dir=`pwd` -Dtarget_arch="x64" -Dbuild_option="release" -f make --depth=. v8dotnet.gyp  --generator-output=./Build/x64.release/makefiles
+ #    V=1 make -C ./Build/x64.release/makefiles
+ #    currentFunction="make x64.release"
+ #    buildResult
     
-    ./gyp/gyp -debug -Dbase_dir=`pwd` -Dtarget_arch="x64" -Dbuild_option="debug" -f make --depth=. v8dotnet.gyp  --generator-output=./Build/x64.debug/makefiles
- 	 V=1 make -C ./Build/x64.debug/makefiles
-     currentFunction="make x64.debug"
-     buildResult
+ #   ./gyp/gyp -debug -Dbase_dir=`pwd` -Dtarget_arch="x64" -Dbuild_option="debug" -f make --depth=. v8dotnet.gyp  --generator-output=./Build/x64.debug/makefiles
+ #	 V=1 make -C ./Build/x64.debug/makefiles
+ #    currentFunction="make x64.debug"
+ #    buildResult
 	
 	#copy resulting files
 	#Release
-	cp Build/x64.release/makefiles/out/Release/lib.target/*.so BuildResult/Release
-	cp Build/x64.release/makefiles/*.so BuildResult/Release
+	cp Build/x64.release/makefiles/out/Release/lib.target/*.dylib BuildResult/Release
+	cp Source/V8.NET-Proxy/V8/out/x64.release/*.dylib BuildResult/Release
+	cp Build/x64.release/makefiles/*.dylib BuildResult/Release
 	#Debug
-	cp Build/x64.debug/makefiles/out/Release/lib.target/*.so BuildResult/Debug
-	cp Build/x64.debug/makefiles/*.so BuildResult/Debug
+	cp Build/x64.debug/makefiles/out/Release/lib.target/*.dylib BuildResult/Debug
+	cp Source/V8.NET-Proxy/V8/out/x64.debug/*.dylib BuildResult/Debug
+	cp Build/x64.debug/makefiles/*.dylib BuildResult/Debug
 	currentFunction="Build V8 native Proxy"
 }
 
@@ -65,8 +72,8 @@ currentFunction=""
 	 printf '\e[1;34m%-6s\e[m \n' "Create Directories"
 	 mkdir -p BuildResult/{Debug,Release}
 	
-	mdtool -v build "--configuration:Release" "Source/V8.Net.MonoDevelop.sln"
-	mdtool -v build "--configuration:Debug" "Source/V8.Net.MonoDevelop.sln"
+	"/Applications/Xamarin Studio.app/Contents/MacOS/mdtool" -v build "--configuration:Release" "Source/V8.Net.MonoDevelop.sln"
+	"/Applications/Xamarin Studio.app/Contents/MacOS/mdtool" -v build "--configuration:Debug" "Source/V8.Net.MonoDevelop.sln"
 	cp Source/V8.NET-Console/bin/Debug/* BuildResult/Debug/
 	cp Source/V8.NET-Console/bin/Release/* BuildResult/Release/
 }
@@ -160,7 +167,7 @@ case $key in
     buildResult
     shift
     ;;
-    -h|--help)
+    -h|--hel.p)
     helptext
     shift
     ;;

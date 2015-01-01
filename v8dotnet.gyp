@@ -4,7 +4,7 @@
     ],
    'variables':{  
       'base_dir%':'<(base_dir)',
-      'target_arch%':'x64',
+      'target_arch%':'ia32',
       'build_option%':'release',
 
    },
@@ -32,7 +32,7 @@
             'Source/V8.NET-Proxy/ValueProxy.cpp',
          ],
          'conditions':[  
-            ['OS=="linux"',
+               ['OS=="mac"',
                {  
                   'cflags':[  
                      '-Werror -Wall -std=c++11 -w -fpermissive -fPIC -c',
@@ -40,13 +40,17 @@
                   'ldflags':[  
                      '-Wall -std=c++11 -shared -fPIC',
                   ],
+                  'xcode_settings':{  
+                     'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
+                     'CLANG_CXX_LIBRARY': 'libc++',
+                  },
                   'copies':[  
                      {  
                         'destination':'<(PRODUCT_DIR)/../../',
                         'files':[  
-                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/lib.target/libicui18n.so',
-                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/lib.target/libicuuc.so',
-                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/lib.target/libv8.so',
+                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/libicui18n.dylib',
+                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/libicuuc.dylib',
+                           'Source/V8.NET-Proxy/V8/out/<(target_arch).<(build_option)/libv8.dylib',
                         ],
                      }
                   ],
@@ -66,7 +70,9 @@
                   },
                   'include_dirs':[  
                      '/usr/include/glib-2.0/',
-                     '/usr/lib/x86_64-linux-gnu/glib-2.0/include/'
+                     '/usr/lib/x86_64-linux-gnu/glib-2.0/include/',
+                     '/Library/Frameworks/Mono.framework/Versions/3.10.0/lib/glib-2.0/include/',
+                     '/Library/Frameworks/Mono.framework/Versions/3.10.0/include/glib-2.0/',
                   ],
                }],
                ['OS=="win"',
